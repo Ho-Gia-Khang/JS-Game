@@ -8,5 +8,5 @@ const image = new Image();
 image.src = "../images/GameMap.png";
 
 image.onload = () => {
-    ctx.drawImage(image, 0, 0);
+    ctx.drawImage(image, -650, -530);
 };
