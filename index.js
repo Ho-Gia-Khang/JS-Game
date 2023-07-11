@@ -37,15 +37,15 @@ const background = new Sprite({
     image: backgroundImage,
 });
 
-// initialize the foreground
-const foregroundImage = new Image();
-foregroundImage.src = "../images/foregroundObjects.png";
-const foreground = new Sprite({
+// initialize the foregrounds
+const foregroundImage_above = new Image();
+foregroundImage_above.src = "../images/foreground_above.png";
+const foreground_above = new Sprite({
     position: {
         x: offset.x,
         y: offset.y,
     },
-    image: foregroundImage,
+    image: foregroundImage_above,
 });
 
 // create the boundary array
@@ -82,7 +82,7 @@ const keys = {
     },
 };
 
-const movables = [background, ...boundaries, foreground];
+const movables = [background, ...boundaries, foreground_above];
 
 // rendering
 animate = () => {
@@ -92,7 +92,7 @@ animate = () => {
         boundary.draw();
     });
     player.draw();
-    foreground.draw();
+    foreground_above.draw();
 
     let moving = true;
     if (keys.w.pressed && lastKey === "w") {
