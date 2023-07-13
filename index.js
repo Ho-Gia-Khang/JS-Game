@@ -106,8 +106,6 @@ battleZonesMap.forEach((row, i) => {
     });
 });
 
-console.log(battleZones);
-
 // initialize the control keys
 const keys = {
     w: {
@@ -126,9 +124,13 @@ const keys = {
 
 const movables = [background, ...boundaries, foreground_above, ...battleZones];
 
+const battle = {
+    initiated: false,
+};
+
 // rendering
 animate = () => {
-    window.requestAnimationFrame(animate);
+    const animationId = window.requestAnimationFrame(animate);
     background.draw();
     boundaries.forEach((boundary) => {
         boundary.draw();
@@ -139,6 +141,14 @@ animate = () => {
     player.draw();
     foreground_above.draw();
 
+    let moving = true;
+    player.moving = false;
+
+    if (battle.initiated) {
+        return;
+    }
+
+    // activate the battle scene
     if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
         for (let i = 0; i < battleZones.length; i++) {
             const battleZone = battleZones[i];
@@ -164,14 +174,31 @@ animate = () => {
                 overlappingArea > (player.width * player.height) / 2 &&
                 Math.random() < 0.05
             ) {
-                console.log("battle zone collided");
+                // deactivate current animation loop
+                window.cancelAnimationFrame(animationId);
+
+                // make the flashing screen
+                battle.initiated = true;
+                gsap.to("#flashing-rect", {
+                    opacity: 1,
+                    repeat: 3,
+                    yoyo: true,
+                    duration: 0.2,
+                    onComplete() {
+                        gsap.to("#flashing-rect", {
+                            opacity: 1,
+                            duration: 0.2,
+                        });
+
+                        // activate the new animation loop
+                        animateBattle();
+                    },
+                });
                 break;
             }
         }
     }
 
-    let moving = true;
-    player.moving = false;
     if (keys.w.pressed && lastKey === "w") {
         player.moving = true;
         player.image = player.sprites.up;
@@ -282,6 +309,10 @@ animate = () => {
 };
 
 animate();
+
+animateBattle = () => {
+    window.requestAnimationFrame(animateBattle);
+};
 
 // the key event for moving the player character
 let lastKey = "";
