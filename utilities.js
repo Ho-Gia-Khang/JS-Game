@@ -11,3 +11,13 @@ isRectangularCollision = ({ rectangle1, rectangle2 }) => {
         rectangle1.position.y + rectangle1.height >= rectangle2.position.y
     );
 };
+
+convertTo2dArray = (initialArray) => {
+    const returnArray = [];
+
+    for (let i = 0; i < initialArray.lenght; i += 70) {
+        returnArray.push(initialArray.slice(i, i + 70));
+    }
+
+    return returnArray;
+};

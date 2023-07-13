@@ -7,6 +7,12 @@ for (let i = 0; i < collisions.length; i += 70) {
     collisionsMap.push(collisions.slice(i, i + 70));
 }
 
+// convert the battle zone array into 2d array
+const battleZonesMap = [];
+for (let i = 0; i < battleZonesData.length; i += 70) {
+    battleZonesMap.push(battleZonesData.slice(i, i + 70));
+}
+
 // player character initializing
 const playerDownImage = new Image();
 playerDownImage.src = "../images/playerDown.png";
@@ -64,7 +70,7 @@ const foreground_above = new Sprite({
     image: foregroundImage_above,
 });
 
-// create the boundary array
+// create the collisions boundary array
 const boundaries = [];
 
 collisionsMap.forEach((row, i) => {
@@ -82,7 +88,27 @@ collisionsMap.forEach((row, i) => {
     });
 });
 
-// initialize te control keys
+// create the battle zone boundaries
+const battleZones = [];
+
+battleZonesMap.forEach((row, i) => {
+    row.forEach((symbol, j) => {
+        if (symbol === 1025) {
+            battleZones.push(
+                new Boundary({
+                    position: {
+                        x: j * Boundary.width + offset.x,
+                        y: i * Boundary.height + offset.y,
+                    },
+                })
+            );
+        }
+    });
+});
+
+console.log(battleZones);
+
+// initialize the control keys
 const keys = {
     w: {
         pressed: false,
@@ -98,7 +124,7 @@ const keys = {
     },
 };
 
-const movables = [background, ...boundaries, foreground_above];
+const movables = [background, ...boundaries, foreground_above, ...battleZones];
 
 // rendering
 animate = () => {
@@ -107,14 +133,49 @@ animate = () => {
     boundaries.forEach((boundary) => {
         boundary.draw();
     });
+    battleZones.forEach((battleZone) => {
+        battleZone.draw();
+    });
     player.draw();
     foreground_above.draw();
+
+    if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
+        for (let i = 0; i < battleZones.length; i++) {
+            const battleZone = battleZones[i];
+
+            // calculate the overlapping area between the player character and the battle zones
+            const overlappingRecWidth =
+                Math.min(
+                    player.position.x + player.width,
+                    battleZone.position.x + battleZone.width
+                ) - Math.max(player.position.x, battleZone.position.x);
+            const overlappingRecHeight =
+                Math.min(
+                    player.position.y + player.width,
+                    battleZone.position.y + battleZone.width
+                ) - Math.max(player.position.y, battleZone.position.y);
+            const overlappingArea = overlappingRecWidth * overlappingRecHeight;
+
+            if (
+                isRectangularCollision({
+                    rectangle1: player,
+                    rectangle2: battleZone,
+                }) &&
+                overlappingArea > (player.width * player.height) / 2 &&
+                Math.random() < 0.05
+            ) {
+                console.log("battle zone collided");
+                break;
+            }
+        }
+    }
 
     let moving = true;
     player.moving = false;
     if (keys.w.pressed && lastKey === "w") {
         player.moving = true;
         player.image = player.sprites.up;
+
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i];
             if (
@@ -133,6 +194,7 @@ animate = () => {
                 break;
             }
         }
+
         if (moving) {
             movables.forEach((movable) => {
                 movable.position.y += 4;
@@ -155,7 +217,6 @@ animate = () => {
                     },
                 })
             ) {
-                console.log("colliding");
                 moving = false;
                 break;
             }
@@ -182,7 +243,6 @@ animate = () => {
                     },
                 })
             ) {
-                console.log("colliding");
                 moving = false;
                 break;
             }
@@ -209,7 +269,6 @@ animate = () => {
                     },
                 })
             ) {
-                console.log("colliding");
                 moving = false;
                 break;
             }
