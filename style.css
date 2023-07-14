@@ -1,5 +1,23 @@
+* {
+    font-family: "Press Start 2P", cursive;
+}
+
 body {
     background-color: black;
+}
+
+h1 {
+    margin: 0;
+}
+
+button {
+    font-size: 16px;
+    border: 0;
+}
+
+button:hover {
+    background-color: #ddd;
+    cursor: pointer;
 }
 
 .container {
@@ -12,8 +30,37 @@ body {
     position: absolute;
     top: 0;
     right: 0;
-    left: 0;
     bottom: 0;
+    left: 0;
     opacity: 0;
     pointer-events: none;
+}
+
+#status-bar {
+    display: flex;
+    background-color: white;
+    height: 140px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 4px black solid;
+}
+
+#buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 66.66%;
+}
+
+#status {
+    width: 33.34%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 4px black solid;
+}
+
+#selected-status {
+    font-size: 16px;
 }

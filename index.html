@@ -4,12 +4,29 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Pokemon</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
         <link rel="stylesheet" type="text/css" href="style.css" />
     </head>
     <body>
         <div class="container">
             <div id="flashing-rect"></div>
             <canvas width="1024" height="576"></canvas>
+            <div id="status-bar">
+                <div id="buttons">
+                    <button>Attack 1</button>
+                    <button>Attack 2</button>
+                    <button>Attack 3</button>
+                    <button>Attack 4</button>
+                </div>
+                <div id="status">
+                    <h1 id="selected-status">Attack Type</h1>
+                </div>
+            </div>
         </div>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
