@@ -34,6 +34,7 @@ const player = new Sprite({
     image: playerDownImage,
     frames: {
         max: 4,
+        hold: 8,
     },
     sprites: {
         up: playerUpImage,
@@ -142,7 +143,7 @@ animate = () => {
     foreground_above.draw();
 
     let moving = true;
-    player.moving = false;
+    player.animate = false;
 
     if (battle.initiated) {
         return;
@@ -207,7 +208,7 @@ animate = () => {
     }
 
     if (keys.w.pressed && lastKey === "w") {
-        player.moving = true;
+        player.animate = true;
         player.image = player.sprites.up;
 
         for (let i = 0; i < boundaries.length; i++) {
@@ -235,7 +236,7 @@ animate = () => {
             });
         }
     } else if (keys.s.pressed && lastKey === "s") {
-        player.moving = true;
+        player.animate = true;
         player.image = player.sprites.down;
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i];
@@ -261,7 +262,7 @@ animate = () => {
             });
         }
     } else if (keys.a.pressed && lastKey === "a") {
-        player.moving = true;
+        player.animate = true;
         player.image = player.sprites.left;
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i];
@@ -287,7 +288,7 @@ animate = () => {
             });
         }
     } else if (keys.d.pressed && lastKey === "d") {
-        player.moving = true;
+        player.animate = true;
         player.image = player.sprites.right;
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i];
@@ -315,7 +316,7 @@ animate = () => {
     }
 };
 
-//animate();
+// animate();
 
 // initialize the battle background
 const battleBackgroundImage = new Image();
@@ -329,10 +330,45 @@ const battleBackGround = new Sprite({
     image: battleBackgroundImage,
 });
 
+// initialize the monster
+const draggleImage = new Image();
+draggleImage.src = "./images/draggleSprite.png";
+
+const draggle = new Sprite({
+    position: {
+        x: 800,
+        y: 100,
+    },
+    image: draggleImage,
+    frames: {
+        max: 4,
+        hold: 24,
+    },
+    animate: true,
+});
+
+const embyImage = new Image();
+embyImage.src = "./images/embySprite.png";
+
+const emby = new Sprite({
+    position: {
+        x: 280,
+        y: 325,
+    },
+    image: embyImage,
+    frames: {
+        max: 4,
+        hold: 24,
+    },
+    animate: true,
+});
+
 // render the battle background
 animateBattle = () => {
     window.requestAnimationFrame(animateBattle);
     battleBackGround.draw();
+    draggle.draw();
+    emby.draw();
 };
 
 animateBattle();
