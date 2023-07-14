@@ -15,16 +15,16 @@ for (let i = 0; i < battleZonesData.length; i += 70) {
 
 // player character initializing
 const playerDownImage = new Image();
-playerDownImage.src = "../images/playerDown.png";
+playerDownImage.src = "./images/playerDown.png";
 
 const playerUpImage = new Image();
-playerUpImage.src = "../images/playerUp.png";
+playerUpImage.src = "./images/playerUp.png";
 
 const playerLeftImage = new Image();
-playerLeftImage.src = "../images/playerLeft.png";
+playerLeftImage.src = "./images/playerLeft.png";
 
 const playerRightImage = new Image();
-playerRightImage.src = "../images/playerRight.png";
+playerRightImage.src = "./images/playerRight.png";
 
 const player = new Sprite({
     position: {
@@ -50,7 +50,7 @@ const offset = {
 };
 
 const backgroundImage = new Image();
-backgroundImage.src = "../images/GameMap.png";
+backgroundImage.src = "./images/GameMap.png";
 const background = new Sprite({
     position: {
         x: offset.x,
@@ -61,7 +61,7 @@ const background = new Sprite({
 
 // initialize the foregrounds
 const foregroundImage_above = new Image();
-foregroundImage_above.src = "../images/foreground_above.png";
+foregroundImage_above.src = "./images/foreground_above.png";
 const foreground_above = new Sprite({
     position: {
         x: offset.x,
@@ -188,10 +188,17 @@ animate = () => {
                         gsap.to("#flashing-rect", {
                             opacity: 1,
                             duration: 0.2,
-                        });
+                            onComplete() {
+                                // activate the new animation loop
+                                animateBattle();
 
-                        // activate the new animation loop
-                        animateBattle();
+                                // fade out the flashing rect to make a smooth transition
+                                gsap.to("#flashing-rect", {
+                                    opacity: 0,
+                                    duration: 0.2,
+                                });
+                            },
+                        });
                     },
                 });
                 break;
@@ -308,11 +315,27 @@ animate = () => {
     }
 };
 
-animate();
+//animate();
 
+// initialize the battle background
+const battleBackgroundImage = new Image();
+battleBackgroundImage.src = "./images/battleBackground.png";
+
+const battleBackGround = new Sprite({
+    position: {
+        x: 0,
+        y: 0,
+    },
+    image: battleBackgroundImage,
+});
+
+// render the battle background
 animateBattle = () => {
     window.requestAnimationFrame(animateBattle);
+    battleBackGround.draw();
 };
+
+animateBattle();
 
 // the key event for moving the player character
 let lastKey = "";
