@@ -36,6 +36,49 @@ button:hover {
     pointer-events: none;
 }
 
+#health-status-1 {
+    position: absolute;
+    background-color: white;
+    width: 250px;
+    top: 50px;
+    left: 50px;
+    border: 4px black solid;
+    padding: 12px;
+}
+
+#pokemon-name {
+    font-size: 16px;
+}
+
+#health-bar-container {
+    position: relative;
+}
+
+#health-bar {
+    height: 5px;
+    background-color: #ccc;
+    margin-top: 10px;
+}
+
+#health-amount {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background-color: lightgreen;
+}
+
+#health-status-2 {
+    position: absolute;
+    background-color: white;
+    width: 250px;
+    top: 330px;
+    right: 50px;
+    border: 4px black solid;
+    padding: 12px;
+}
+
 #status-bar {
     display: flex;
     background-color: white;
