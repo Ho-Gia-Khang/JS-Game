@@ -36,7 +36,7 @@ button:hover {
     pointer-events: none;
 }
 
-#health-status-1 {
+#enemy-health-status {
     position: absolute;
     background-color: white;
     width: 250px;
@@ -46,7 +46,8 @@ button:hover {
     padding: 12px;
 }
 
-#pokemon-name {
+#enemy-pokemon-name,
+#ally-pokemon-name {
     font-size: 16px;
 }
 
@@ -60,7 +61,8 @@ button:hover {
     margin-top: 10px;
 }
 
-#health-amount {
+#ally-health-amount,
+#enemy-health-amount {
     position: absolute;
     top: 0;
     left: 0;
@@ -69,7 +71,7 @@ button:hover {
     background-color: lightgreen;
 }
 
-#health-status-2 {
+#ally-health-status {
     position: absolute;
     background-color: white;
     width: 250px;

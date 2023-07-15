@@ -15,27 +15,29 @@
     <body>
         <div class="container">
             <div id="flashing-rect"></div>
-            <div id="health-status-1">
-                <h1 id="pokemon-name">Draggle</h1>
+
+            <div id="enemy-health-status">
+                <h1 id="enemy-pokemon-name">Draggle</h1>
                 <div id="health-bar-container">
                     <div id="health-bar"></div>
-                    <div id="health-amount"></div>
+                    <div id="enemy-health-amount"></div>
                 </div>
             </div>
-            <div id="health-status-2">
-                <h1 id="pokemon-name">Emby</h1>
+
+            <div id="ally-health-status">
+                <h1 id="ally-pokemon-name">Emby</h1>
                 <div id="health-bar-container">
                     <div id="health-bar"></div>
-                    <div id="health-amount"></div>
+                    <div id="ally-health-amount"></div>
                 </div>
             </div>
+
             <canvas width="1024" height="576"></canvas>
+
             <div id="status-bar">
                 <div id="buttons">
-                    <button>Attack 1</button>
+                    <button>Tackle</button>
                     <button>Attack 2</button>
-                    <button>Attack 3</button>
-                    <button>Attack 4</button>
                 </div>
                 <div id="status">
                     <h1 id="selected-status">Attack Type</h1>

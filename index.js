@@ -330,7 +330,7 @@ const battleBackGround = new Sprite({
     image: battleBackgroundImage,
 });
 
-// initialize the monster
+// initialize the monsters
 const draggleImage = new Image();
 draggleImage.src = "./images/draggleSprite.png";
 
@@ -345,6 +345,7 @@ const draggle = new Sprite({
         hold: 24,
     },
     animate: true,
+    isEnemy: true,
 });
 
 const embyImage = new Image();
@@ -372,6 +373,20 @@ animateBattle = () => {
 };
 
 animateBattle();
+
+document.querySelectorAll("button").forEach((button) => {
+    button.addEventListener("click", () => {
+        console.log("clicked");
+        emby.attack({
+            attack: {
+                name: "Tackle",
+                damage: 10,
+                type: "Normal",
+            },
+            recipient: draggle,
+        });
+    });
+});
 
 // the key event for moving the player character
 let lastKey = "";
