@@ -11,43 +11,19 @@ const battleBackGround = new Sprite({
 });
 
 // initialize the monsters
-const draggleImage = new Image();
-draggleImage.src = "./images/draggleSprite.png";
+const draggle = new Monster(monsters.Draggle);
+const emby = new Monster(monsters.Emby);
 
-const draggle = new Sprite({
-    position: {
-        x: 800,
-        y: 100,
-    },
-    image: draggleImage,
-    frames: {
-        max: 4,
-        hold: 24,
-    },
-    animate: true,
-    isEnemy: true,
-    name: "Draggle",
-});
+const renderedSprites = [draggle, emby];
 
-const embyImage = new Image();
-embyImage.src = "./images/embySprite.png";
-
-const emby = new Sprite({
-    position: {
-        x: 280,
-        y: 325,
-    },
-    image: embyImage,
-    frames: {
-        max: 4,
-        hold: 24,
-    },
-    animate: true,
-    name: "Emby",
+// create buttons of the skills
+emby.attacks.forEach((attack) => {
+    const button = document.createElement("button");
+    button.innerHTML = attack.name;
+    document.querySelector("#buttons").append(button);
 });
 
 // render the battle background
-const renderedSprites = [draggle, emby];
 animateBattle = () => {
     window.requestAnimationFrame(animateBattle);
     battleBackGround.draw();
