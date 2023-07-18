@@ -92,6 +92,18 @@ button:hover {
     border-top: 4px black solid;
 }
 
+#dialogue-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: white;
+    padding: 12px;
+    display: none;
+    cursor: pointer;
+}
+
 #buttons {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
