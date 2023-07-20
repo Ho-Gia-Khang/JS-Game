@@ -48,17 +48,12 @@ document.querySelectorAll("button").forEach((button) => {
             renderedSprites,
         });
 
+        // initilize the enemy attacks
+        const randomAttack =
+            draggle.attacks[Math.floor(Math.random() * draggle.attacks.length)];
         queue.push(() => {
             draggle.attack({
-                attack: attacks.Tackle,
-                recipient: emby,
-                renderedSprites,
-            }); // end enemy attack
-        }); // end pushing into queue
-
-        queue.push(() => {
-            draggle.attack({
-                attack: attacks.Fireball,
+                attack: randomAttack,
                 recipient: emby,
                 renderedSprites,
             }); // end enemy attack
