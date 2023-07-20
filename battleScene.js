@@ -59,6 +59,14 @@ document.querySelectorAll("button").forEach((button) => {
             }); // end enemy attack
         }); // end pushing into queue
     }); // end add event listener into buttons
+
+    button.addEventListener("mouseenter", (e) => {
+        const selectedAttack = attacks[e.currentTarget.innerHTML];
+        document.querySelector("#selected-status").innerHTML =
+            selectedAttack.type;
+        document.querySelector("#selected-status").style.color =
+            selectedAttack.color;
+    });
 }); // end querySelectorAll
 
 document.querySelector("#dialogue-box").addEventListener("click", (e) => {
