@@ -34,6 +34,7 @@ class Monster extends Sprite {
         gsap.to(this, {
             opacity: 0,
         });
+        audio.Victory.play();
     }
 
     attack({ attack, recipient, renderedSprites }) {
@@ -66,6 +67,7 @@ class Monster extends Sprite {
 
                         // Enemy get hits
                         onComplete: () => {
+                            audio.TackleHit.play();
                             gsap.to(healthBar, {
                                 width: recipient.health + "%",
                             });
@@ -111,12 +113,14 @@ class Monster extends Sprite {
                 renderedSprites.splice(1, 0, fireball);
 
                 // fire the fireball to the enemy
+                audio.InitFireball.play();
                 gsap.to(fireball.position, {
                     x: recipient.position.x,
                     y: recipient.position.y,
 
                     // enemy get hit
                     onComplete: () => {
+                        audio.FireballHit.play();
                         gsap.to(healthBar, {
                             width: recipient.health + "%",
                         });

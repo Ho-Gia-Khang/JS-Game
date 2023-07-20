@@ -179,6 +179,8 @@ animate = () => {
                 window.cancelAnimationFrame(animationId);
 
                 // make the flashing screen
+                audio.Map.stop();
+                audio.InitBattle.play();
                 battle.initiated = true;
                 gsap.to("#flashing-rect", {
                     opacity: 1,
@@ -191,6 +193,7 @@ animate = () => {
                             duration: 0.2,
                             onComplete() {
                                 // activate the new animation loop
+                                initBattle();
                                 animateBattle();
 
                                 // fade out the flashing rect to make a smooth transition
@@ -316,7 +319,7 @@ animate = () => {
     }
 };
 
-// animate();
+animate();
 
 // the key event for moving the player character
 let lastKey = "";
@@ -355,5 +358,13 @@ window.addEventListener("keyup", (e) => {
         case "d":
             keys.d.pressed = false;
             break;
+    }
+});
+
+let clicked = false;
+window.addEventListener("click", () => {
+    if (!clicked) {
+        audio.Map.play();
+        clicked = true;
     }
 });

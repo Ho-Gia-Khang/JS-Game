@@ -16,38 +16,45 @@
         <div class="container">
             <div id="flashing-rect"></div>
 
-            <div id="enemy-health-status">
-                <h1 id="enemy-pokemon-name">Draggle</h1>
-                <div id="health-bar-container">
-                    <div id="health-bar"></div>
-                    <div id="enemy-health-amount"></div>
-                </div>
-            </div>
-
-            <div id="ally-health-status">
-                <h1 id="ally-pokemon-name">Emby</h1>
-                <div id="health-bar-container">
-                    <div id="health-bar"></div>
-                    <div id="ally-health-amount"></div>
-                </div>
-            </div>
-
             <canvas width="1024" height="576"></canvas>
 
-            <div id="status-bar">
-                <div id="dialogue-box">Amongus</div>
-                <div id="buttons"></div>
-                <div id="status">
-                    <h1 id="selected-status">Attack Type</h1>
+            <div id="user-interface">
+                <div id="enemy-health-status">
+                    <h1 id="enemy-pokemon-name">Draggle</h1>
+                    <div id="health-bar-container">
+                        <div id="health-bar"></div>
+                        <div id="enemy-health-amount"></div>
+                    </div>
+                </div>
+
+                <div id="ally-health-status">
+                    <h1 id="ally-pokemon-name">Emby</h1>
+                    <div id="health-bar-container">
+                        <div id="health-bar"></div>
+                        <div id="ally-health-amount"></div>
+                    </div>
+                </div>
+
+                <div id="status-bar">
+                    <div id="dialogue-box">Amongus</div>
+                    <div id="buttons"></div>
+                    <div id="status">
+                        <h1 id="selected-status">Attack Type</h1>
+                    </div>
                 </div>
             </div>
         </div>
+
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
             integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
         ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
+            integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="data/audio.js"></script>
         <script src="data/battleZones.js"></script>
         <script src="data/collisions.js"></script>
         <script src="data/attacks.js"></script>
