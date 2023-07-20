@@ -24,12 +24,24 @@ class Monster extends Sprite {
         this.attacks = attacks;
     }
 
+    faint() {
+        document.querySelector("#dialogue-box").innerHTML =
+            this.name + " fainted!";
+        gsap.to(this.position, {
+            y: this.position.y + 20,
+        });
+
+        gsap.to(this, {
+            opacity: 0,
+        });
+    }
+
     attack({ attack, recipient, renderedSprites }) {
         const activatedAttack = document.querySelector("#dialogue-box");
         activatedAttack.style.display = "block";
         activatedAttack.innerHTML = this.name + " used " + attack.name;
 
-        this.health -= attack.damage;
+        recipient.health -= attack.damage;
 
         let movementDistance = 20;
         let healthBar = "#enemy-health-amount";
@@ -55,7 +67,7 @@ class Monster extends Sprite {
                         // Enemy get hits
                         onComplete: () => {
                             gsap.to(healthBar, {
-                                width: this.health + "%",
+                                width: recipient.health + "%",
                             });
 
                             gsap.to(recipient.position, {
@@ -106,7 +118,7 @@ class Monster extends Sprite {
                     // enemy get hit
                     onComplete: () => {
                         gsap.to(healthBar, {
-                            width: this.health + "%",
+                            width: recipient.health + "%",
                         });
 
                         gsap.to(recipient.position, {

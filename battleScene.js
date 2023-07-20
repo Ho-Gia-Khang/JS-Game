@@ -48,6 +48,11 @@ document.querySelectorAll("button").forEach((button) => {
             renderedSprites,
         });
 
+        if (draggle.health <= 0) {
+            queue.push(() => {
+                draggle.faint();
+            });
+        }
         // initilize the enemy attacks
         const randomAttack =
             draggle.attacks[Math.floor(Math.random() * draggle.attacks.length)];
@@ -57,9 +62,16 @@ document.querySelectorAll("button").forEach((button) => {
                 recipient: emby,
                 renderedSprites,
             }); // end enemy attack
+
+            if (emby.health <= 0) {
+                queue.push(() => {
+                    emby.faint();
+                });
+            }
         }); // end pushing into queue
     }); // end add event listener into buttons
 
+    // display the attack type when player hover the correspond attack button
     button.addEventListener("mouseenter", (e) => {
         const selectedAttack = attacks[e.currentTarget.innerHTML];
         document.querySelector("#selected-status").innerHTML =
@@ -75,6 +87,5 @@ document.querySelector("#dialogue-box").addEventListener("click", (e) => {
         queue.shift();
     } else {
         e.currentTarget.style.display = "none";
-        console.log("AmongUs");
     }
 });
