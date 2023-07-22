@@ -39,3 +39,8 @@ const monsters = {
         attacks: [attacks.Tackle, attacks.Fireball],
     },
 };
+
+const monstersArray = [];
+for (let monster in monsters) {
+    monstersArray.push(monsters[monster]);
+}

@@ -16,19 +16,25 @@ let emby;
 let renderedSprites;
 let battleAnimationId;
 let queue;
+let enemy;
 
 initBattle = () => {
     audio.Battle.play();
+
+    enemy = new Monster(
+        monstersArray[Math.floor(Math.random() * monstersArray.length)]
+    );
+    console.log(enemy);
+    emby = new Monster(monsters.Emby);
+    renderedSprites = [enemy, emby];
+    queue = [];
+
     document.querySelector("#user-interface").style.display = "block";
+    document.querySelector("#enemy-pokemon-name").innerHTML = enemy.name;
     document.querySelector("#dialogue-box").style.display = "none";
     document.querySelector("#enemy-health-amount").style.width = "100%";
     document.querySelector("#ally-health-amount").style.width = "100%";
     document.querySelector("#buttons").replaceChildren();
-
-    draggle = new Monster(monsters.Draggle);
-    emby = new Monster(monsters.Emby);
-    renderedSprites = [draggle, emby];
-    queue = [];
 
     // create buttons of the skills
     emby.attacks.forEach((attack) => {
@@ -44,24 +50,22 @@ initBattle = () => {
 
             emby.attack({
                 attack: selectedAttack,
-                recipient: draggle,
+                recipient: enemy,
                 renderedSprites,
             });
 
-            if (draggle.health <= 0) {
+            if (enemy.health <= 0) {
                 queue.push(() => {
-                    draggle.faint();
+                    enemy.faint();
                 });
 
                 endBattle();
             }
             // initilize the enemy attacks
             const randomAttack =
-                draggle.attacks[
-                    Math.floor(Math.random() * draggle.attacks.length)
-                ];
+                enemy.attacks[Math.floor(Math.random() * enemy.attacks.length)];
             queue.push(() => {
-                draggle.attack({
+                enemy.attack({
                     attack: randomAttack,
                     recipient: emby,
                     renderedSprites,
