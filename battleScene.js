@@ -1,6 +1,6 @@
 // initialize the battle background
 const battleBackgroundImage = new Image();
-battleBackgroundImage.src = "./images/battleBackground.png";
+battleBackgroundImage.src = "./images/map/battleBackground.png";
 
 const battleBackGround = new Sprite({
     position: {
@@ -11,33 +11,33 @@ const battleBackGround = new Sprite({
 });
 
 // initialize the battle scence
-let draggle;
-let emby;
+let enemy;
+let ally;
 let renderedSprites;
 let battleAnimationId;
 let queue;
-let enemy;
 
 initBattle = () => {
     audio.Battle.play();
 
     enemy = new Monster(
-        monstersArray[Math.floor(Math.random() * monstersArray.length)]
+        enemyMonstersArray[
+            Math.floor(Math.random() * enemyMonstersArray.length)
+        ]
     );
-    console.log(enemy);
-    emby = new Monster(monsters.Emby);
-    renderedSprites = [enemy, emby];
+    ally = new Monster(allyMonsters.Emby);
+    renderedSprites = [enemy, ally];
     queue = [];
 
     document.querySelector("#user-interface").style.display = "block";
     document.querySelector("#enemy-pokemon-name").innerHTML = enemy.name;
-    document.querySelector("#dialogue-box").style.display = "none";
     document.querySelector("#enemy-health-amount").style.width = "100%";
     document.querySelector("#ally-health-amount").style.width = "100%";
+    document.querySelector("#dialogue-box").style.display = "none";
     document.querySelector("#buttons").replaceChildren();
 
     // create buttons of the skills
-    emby.attacks.forEach((attack) => {
+    ally.attacks.forEach((attack) => {
         const button = document.createElement("button");
         button.innerHTML = attack.name;
         document.querySelector("#buttons").append(button);
@@ -48,7 +48,7 @@ initBattle = () => {
         button.addEventListener("click", (e) => {
             const selectedAttack = attacks[e.currentTarget.innerHTML];
 
-            emby.attack({
+            ally.attack({
                 attack: selectedAttack,
                 recipient: enemy,
                 renderedSprites,
@@ -67,13 +67,13 @@ initBattle = () => {
             queue.push(() => {
                 enemy.attack({
                     attack: randomAttack,
-                    recipient: emby,
+                    recipient: ally,
                     renderedSprites,
                 }); // end enemy attack
 
-                if (emby.health <= 0) {
+                if (ally.health <= 0) {
                     queue.push(() => {
-                        emby.faint();
+                        ally.faint();
                     });
 
                     endBattle();

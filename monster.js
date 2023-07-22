@@ -46,11 +46,9 @@ class Monster extends Sprite {
 
         let movementDistance = 20;
         let healthBar = "#enemy-health-amount";
-        let rotation = 2;
         if (this.isEnemy) {
             movementDistance = -20;
             healthBar = "#ally-health-amount";
-            rotation = -2.2;
         }
 
         switch (attack.name) {
@@ -96,7 +94,7 @@ class Monster extends Sprite {
             case "Fireball":
                 // initialize the fireball sprite
                 const fireballImage = new Image();
-                fireballImage.src = "./images/fireball.png";
+                fireballImage.src = "./images/particles/fireball.png";
                 const fireball = new Sprite({
                     position: {
                         x: this.position.x,
@@ -108,7 +106,7 @@ class Monster extends Sprite {
                         hold: 8,
                     },
                     animate: true,
-                    rotation,
+                    rotation: -2.2,
                 });
                 renderedSprites.splice(1, 0, fireball);
 

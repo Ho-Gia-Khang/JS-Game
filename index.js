@@ -51,7 +51,7 @@ const offset = {
 };
 
 const backgroundImage = new Image();
-backgroundImage.src = "./images/GameMap.png";
+backgroundImage.src = "./images/map/GameMap.png";
 const background = new Sprite({
     position: {
         x: offset.x,
@@ -62,7 +62,7 @@ const background = new Sprite({
 
 // initialize the foregrounds
 const foregroundImage_above = new Image();
-foregroundImage_above.src = "./images/foreground_above.png";
+foregroundImage_above.src = "./images/map/foreground_above.png";
 const foreground_above = new Sprite({
     position: {
         x: offset.x,
